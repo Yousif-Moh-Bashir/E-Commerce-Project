@@ -85,13 +85,13 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.add.brand') }}" class="">
-                                                <div class="text">New Brand</div>
+                                            <a href="{{ route('admin.brands') }}" class="">
+                                                <div class="text">Brands</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brands') }}" class="">
-                                                <div class="text">Brands</div>
+                                            <a href="{{ route('admin.add.brand') }}" class="">
+                                                <div class="text">New Brand</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -103,13 +103,13 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-category.html" class="">
-                                                <div class="text">New Category</div>
+                                            <a href="{{ route('admin.categories') }}" class="">
+                                                <div class="text">Categories</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="categories.html" class="">
-                                                <div class="text">Categories</div>
+                                            <a href="{{ route('admin.add.categories') }}" class="">
+                                                <div class="text">New Category</div>
                                             </a>
                                         </li>
                                     </ul>
