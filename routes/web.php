@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
@@ -22,12 +23,19 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+# Open Access Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('shop', [ShopController::class, 'index'])->name('shop');
+Route::get('shop/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
 
+
+# Middleware For User
 Route::middleware('auth')->group(function(){
     Route::get('account-dashboard',[UserController::class,'index'])->name('user.index');
 });
 
+
+# Middleware For Admin
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
     Route::get('admin',[AdminController::class,'index'])->name('admin.index');
