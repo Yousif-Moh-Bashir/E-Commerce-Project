@@ -363,29 +363,39 @@
                 <div class="product-card-wrapper">
                     <div class="product-card mb-3 mb-md-4 mb-xxl-5">
                         <div class="pc__img-wrapper">
-                        <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <a href="{{ route('shop.product.details',$product->slug) }}"><img loading="lazy" src="{{ asset('assets/uploads/product/'.$product->image) }}" width="330"height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                            <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <a href="{{ route('shop.product.details',$product->slug) }}"><img loading="lazy" src="{{ asset('assets/uploads/product/'.$product->image) }}" width="330"height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        @foreach (explode(',',$product->images) as $gimg)
+                                            <a href="{{ route('shop.product.details',$product->slug) }}"><img loading="lazy" src="{{ asset('assets/uploads/product') }}/{{ $gimg }}" width="330" height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    @foreach (explode(',',$product->images) as $gimg)
-                                        <a href="{{ route('shop.product.details',$product->slug) }}"><img loading="lazy" src="{{ asset('assets/uploads/product') }}/{{ $gimg }}" width="330" height="400" alt="{{ $product->name }}" class="pc__img"></a>
-                                    @endforeach
-                                </div>
+                                <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_prev_sm" />
+                                </svg></span>
+                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_next_sm" />
+                                </svg></span>
                             </div>
-                            <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_prev_sm" />
-                            </svg></span>
-                            <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_next_sm" />
-                            </svg></span>
-                        </div>
-                        <button
-                            class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                            data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                            @if(Cart::instance('cart')->content()->where('id',$product->id)->count() > 0 )
+                                <a href="{{ route('cart') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning">Go to Cart</a>
+                            @else
+                                <form name="addtocart-form" method="post" action="{{ route('cart.add') }}">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}">
+                                    <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-info" data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                                </form>
+                            @endif
                         </div>
 
                         <div class="pc__info position-relative">

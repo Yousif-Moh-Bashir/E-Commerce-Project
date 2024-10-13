@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
@@ -27,6 +28,12 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('shop', [ShopController::class, 'index'])->name('shop');
 Route::get('shop/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
+
+# Cart Route
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::post('cart-add', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::put('cart-increase/{rowId}', [CartController::class, 'increase_cart'])->name('cart.increase');
+Route::put('cart-decrease/{rowId}', [CartController::class, 'decrease_cart'])->name('cart.decrease');
 
 
 # Middleware For User
