@@ -164,7 +164,7 @@
                                     <form action="{{ route('logout') }}" id="logout-form" method="POST">
                                         @csrf
                                         <a href="{{ route('logout') }}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit()">
-                                            <div class="icon"><i class="icon-heart"></i></div>
+                                            <div class="icon"><i class="icon-log-out"></i></div>
                                             <div class="text">Logout</div>
                                         </a>
                                     </form>
@@ -352,8 +352,7 @@
                                                     </div>
                                                     <div>
                                                         <div class="body-title-2">Account has been verified</div>
-                                                        <div class="text-tiny">Mauris libero ex, iaculis vitae rhoncus
-                                                            et</div>
+                                                        <div class="text-tiny">Mauris libero ex, iaculis vitae rhoncuset</div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -439,12 +438,15 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="login.html" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-log-out"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Log out</div>
-                                                </a>
+                                                <form action="{{ route('logout') }}" id="logout-form" method="POST">
+                                                    @csrf
+                                                    <a href="{{ route('logout') }}" class="user-item" onclick="event.preventDefault();document.getElementById('logout-form').submit()">
+                                                        <div class="icon">
+                                                            <i class="icon-log-out"></i>
+                                                        </div>
+                                                        <div class="body-title-2">Log out</div>
+                                                    </a>
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>

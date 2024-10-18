@@ -34,6 +34,8 @@ Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::post('cart-add', [CartController::class, 'add_to_cart'])->name('cart.add');
 Route::put('cart-increase/{rowId}', [CartController::class, 'increase_cart'])->name('cart.increase');
 Route::put('cart-decrease/{rowId}', [CartController::class, 'decrease_cart'])->name('cart.decrease');
+Route::delete('cart-remove/{rowId}', [CartController::class, 'remove_cart'])->name('cart.remove');
+Route::delete('cart-clear', [CartController::class, 'clear_cart'])->name('cart.clear');
 
 
 # Middleware For User
